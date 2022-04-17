@@ -2,11 +2,14 @@
 
 A simple test for postgres clients performances.
 
-# Limitations 
+# Requirements
+
+* docker
+* make
 
 # Instructions
 
-Simply run `make launch` and open the browser at the url `http://localhost:8089/` and setup your test.
+Run `make launch`, open the browser at the url `http://localhost:8089/`, setup the parameters for your test and launch it.
 
 # Limitations
 
