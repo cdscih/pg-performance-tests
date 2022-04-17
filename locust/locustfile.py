@@ -7,12 +7,8 @@ class WebsiteUser(HttpUser):
 
     @task
     def python_connection_pools(self):
-        self.client.get(url="http://python-server:8000/")
-
-    # @task
-    # def python_single_connections(self):
-    #     self.client.get(url="http://python-server:8000/single_connection")
+        self.client.get(url="http://python-server:8000/py")
 
     @task
     def go(self):
-        self.client.get(url="http://go-server:8000/")
+        self.client.get(url="http://go-server:8001/go")

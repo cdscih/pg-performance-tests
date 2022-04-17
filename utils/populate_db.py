@@ -30,19 +30,11 @@ async def run():
 
         await create_table_if_needed(conn)
 
-        for i in range(5000):
-            num, data, other_data, even_more_data = (
-                uuid4(),
-                uuid4(),
-                uuid4(),
-                uuid4(),
-            )
-            await conn.execute(
-                f"INSERT INTO test (num, data, other_data, even_more_data) VALUES ('{num}', '{data}', '{other_data}', '{even_more_data}')"  # noqa: E501
-            )
-            print(
-                f"row {i+1} inserted {num}, {data}, {other_data}, {even_more_data}"  # noqa: E501
-            )
+        values = [ f"('{uuid4()}', '{uuid4()}', '{uuid4()}', '{uuid4()}')" for i in range(5000)]
+        
+        await conn.execute(f'INSERT INTO test (num, data, other_data, even_more_data) VALUES {(", ").join(values)};')
+        
+        print(f"Inserted {len(values)} rows in the db.")
 
     await conn.close()
 

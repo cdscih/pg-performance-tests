@@ -33,8 +33,7 @@ async def single_connection_handler():
 
 def create_app():
     app = FastAPI()
-    app.add_api_route("/", connection_pool_handler, methods=["GET"])
-    app.add_api_route("/connection_pool", connection_pool_handler, methods=["GET"])
+    app.add_api_route("/py", connection_pool_handler, methods=["GET"])
     app.add_api_route(
         "/single_connection", single_connection_handler, methods=["GET"]
     )

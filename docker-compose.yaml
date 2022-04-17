@@ -18,17 +18,13 @@ services:
       - "8089:8089"
   python-server:
     build:
-      context: ./python-server
+      context: ./servers/python
     restart: always
-    volumes:
-      - ./python-server:/app
     ports:
       - "8000:8000"
   go-server:
     build:
-      context: ./go-server
+      context: ./servers/go
     restart: always
-    volumes:
-      - ./go-server:/app
     ports:
       - "8001:8001"

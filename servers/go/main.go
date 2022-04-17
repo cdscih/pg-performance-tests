@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/go-martini/martini"
-	"github.com/jackc/pgx/pgxpool"
+	"github.com/jackc/pgx/v4/pgxpool"
 )
 
 const (
@@ -60,6 +60,6 @@ func handlerInit() func(w http.ResponseWriter, r *http.Request) {
 func main() {
 	handler := handlerInit()
 	m := martini.Classic()
-	m.Get("/", handler)
-	m.RunOnAddr(":8000")
+	m.Get("/go", handler)
+	m.RunOnAddr(":8001")
 }
