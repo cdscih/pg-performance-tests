@@ -1,11 +1,13 @@
 # Postgres tests
 
-A simple test for postgres clients performances.
+Quick and dirty test for postgres clients performances.
+
+You can find an example of the test output in the examples folder.
 
 # Requirements
 
-* docker
-* make
+- docker
+- make
 
 # Instructions
 
@@ -14,4 +16,5 @@ Run `make launch`, open the browser at the url `http://localhost:8089/`, setup t
 # Limitations
 
 - the only available clients are in python and go
-- only connection pools are being tested currently
+- only raw ```SELECT *``` queries are being tested right now
+- there are probably better tools to execute the tests than locust

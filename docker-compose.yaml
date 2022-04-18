@@ -16,15 +16,35 @@ services:
       context: ./locust
     ports:
       - "8089:8089"
-  python-server:
+  py_pool:
     build:
       context: ./servers/python
     restart: always
+    environment:
+      TYPE: "pool"
     ports:
       - "8000:8000"
-  go-server:
+  py_std:
+    build:
+      context: ./servers/python
+    restart: always
+    environment:
+      TYPE: "std"
+    ports:
+      - "8001:8001"
+  go_pool:
     build:
       context: ./servers/go
     restart: always
+    environment:
+      TYPE: "pool"
     ports:
-      - "8001:8001"
+      - "8002:8002"
+  go_std:
+    build:
+      context: ./servers/go
+    restart: always
+    environment:
+      TYPE: "std"
+    ports:
+      - "8003:8003"

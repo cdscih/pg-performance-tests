@@ -3,6 +3,8 @@ import asyncpg
 
 import uvicorn
 
+from os import environ
+
 pool = None
 
 
@@ -22,7 +24,7 @@ async def connection_pool_handler():
         return {"fetched_records_length": len(records)}
 
 
-async def single_connection_handler():
+async def standard_connection_handler():
     con = await asyncpg.connect(
         host="db", database="postgres", user="postgres", password="example"
     )
@@ -31,15 +33,21 @@ async def single_connection_handler():
     return {"fetched_records_length": len(records)}
 
 
+type = environ.get("TYPE", "pool")
+
+
 def create_app():
     app = FastAPI()
-    app.add_api_route("/py", connection_pool_handler, methods=["GET"])
-    app.add_api_route(
-        "/single_connection", single_connection_handler, methods=["GET"]
-    )
+    if type == "pool":
+        app.add_api_route("/py_pool", connection_pool_handler, methods=["GET"])
+    else:
+        app.add_api_route("/py_std", standard_connection_handler, methods=["GET"])
     return app
 
 
 app = create_app()
 
-uvicorn.run(app, host="0.0.0.0", port=8000)
+if type == "pool":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+else:
+    uvicorn.run(app, host="0.0.0.0", port=8001)
